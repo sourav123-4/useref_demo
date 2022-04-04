@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react'
+import './App.css'
 function App() {
+  const [value,setValue]=React.useState("")
+  const previtem=React.useRef()
+  React.useEffect(()=>{
+    previtem.current=value
+  },[value])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input onChange={item=> setValue(item.target.value)}/>
+      <h1>your current input is <span>{value}</span></h1>
+      <h1> And your previous input is <span>{previtem.current}</span></h1>
     </div>
   );
 }
